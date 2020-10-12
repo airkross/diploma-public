@@ -1,0 +1,36 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "user_type": "admin",
+            "full_name": "Гусейнов Руслан Рустамович",
+            "email": "qwe@gmail.com",
+            "password": "123",
+            "photo": "https://airkross.github.io/portfoliofl/img/2.jpg"
+        },
+        {
+            "id": 2,
+            "user_type": "employee",
+            "full_name": "Кашуба Богдан Александрович",
+            "email": "asd@gmail.com",
+            "password": "123",
+            "photo": "https://raw.githubusercontent.com/airkross/portfoliofl/master/img/2.png"
+        },
+        {
+            "id": 3,
+            "user_type": "employee",
+            "full_name": "Ковальченко Дмитрий Юрьевич",
+            "email": "kek@gmail.com",
+            "password": "123",
+            "photo": "https://raw.githubusercontent.com/airkross/portfoliofl/master/img/4.png"
+        },
+        {
+            "id": 1,
+            "user_type": "user",
+            "full_name": "Бурнашкин Николай Валентинович",
+            "email": "zxc@gmail.com",
+            "password": "123",
+            "photo": "https://raw.githubusercontent.com/airkross/portfoliofl/master/img/3.png"
+        }
+    ]
+}
