@@ -1,20 +1,10 @@
-# diploma
+#ИНСТРУКЦИЯ РАЗВЕРТЫВАНИЯ ПРОЕКТЫ
+1) Если у вас не установлен node.js на компьютере, перейдите по данной (https://nodejs.org/ru/) ссылке и установите LTS версию node.js (https://prnt.sc/uylyy3)
+2) Произвести клонирование репозитория на локальный компьютер или скачать проект по данной (https://github.com/airkross/diploma-public/archive/main.zip) ссылке
+3) Разархивировать проект на рабочий стол (или куда удобно), зайти в корневую папку (https://prnt.sc/uym22y) далее через зажатие кнопки shift+ПКМ открыть Power Shell (https://prnt.sc/uym2vt) или можно через cmd перейти в нужную папку.
+4) В командной строке нужно выполнить команду npm i (https://prnt.sc/uym49x)
+5) После того как все зависимости будут установлены, не закрывая командную строку и не меняя путь, нужно выполнить команду npm run dev (https://prnt.sc/uym5h0)
+6) после выполнения команды npm run dev, проект будет запущен на localhost:3000 (https://prnt.sc/uym6g0) и нужно будет ввести его в адресной строке в браузере 
+(https://prnt.sc/uym70c)
+7) Если четко следовать инструкции, то отобразится следующий экран: https://prnt.sc/uym7bh
 
-## Build Setup
-
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
