@@ -36,13 +36,6 @@
           <p class="card-text">
             Состояние отправления: {{ parseData.departure.state_departure }}
           </p>
-          <hr>
-              <h6>Создатель блока:</h6>
-          <p class="card-text">Идентификатор пользователя: {{ block.createrBlock.id }}</p>
-          <p class="card-text">ФИО: {{ block.createrBlock.full_name }}</p>
-          <p class="card-text">Email: {{ block.createrBlock.email }}</p>
-          <p class="card-text">Фото:</p>
-          <img :src="block.createrBlock.photo" alt="" style="width:100%">
         </div>
         <div class="card-footer-wrap">
           <hr />

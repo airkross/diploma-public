@@ -1,19 +1,14 @@
 export const state = () => ({
   user: [],
-  isAuth: false,
-  authUserComplete: []
+  isAuth: false
 });
 
 export const mutations = {
   SET_USER(state, user) {
     state.user = user;
   },
-  SET_AUTH(state, payload) {
+  SET_AUTH(state) {
     state.isAuth = true
-    state.authUserComplete = payload
-  },
-  SET_LOGOUT(state){
-    state.isAuth = false
   }
 };
 
@@ -25,12 +20,11 @@ export const actions = {
   },
   setAuth({
     commit
-  }, payload) {
-    commit('SET_AUTH', payload)
+  }) {
+    commit('SET_AUTH')
   }
 };
 export const getters = {
   authUser: s => s.user,
   isAuth: s => s.isAuth,
-  authUserComplete: s => s.authUserComplete,
 }
