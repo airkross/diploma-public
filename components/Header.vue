@@ -16,18 +16,36 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
+            <!-- видят все -->
             <nuxt-link exact active-class="active" class="nav-link" to="/"
               >Главная
             </nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link active-class="active" class="nav-link" to="/create"
+          <!-- админ и работник -->
+          <li class="nav-item" v-if="
+            isAuth() && authUser()[0].user_type === 'admin' || 
+            isAuth() && authUser()[0].user_type === 'employee'
+          ">
+            <nuxt-link active-class="active" class="nav-link" to="/blockchains"
+              >Список Блокчейнов</nuxt-link
+            >
+          </li>
+          <!-- только админ -->
+          <li class="nav-item" v-if="isAuth() && authUser()[0].user_type === 'admin'">
+            <nuxt-link active-class="active" class="nav-link" to="/create/blockchain"
               >Создать отправление</nuxt-link
             >
           </li>
-          <li class="nav-item">
-            <nuxt-link active-class="active" class="nav-link" to="/blockchain"
-              >Текущий Blockchain</nuxt-link
+          <!-- админ и работник -->
+          <li class="nav-item" v-if="isAuth() && authUser()[0].user_type === 'admin' || isAuth() && authUser()[0].user_type === 'employee'">
+            <nuxt-link active-class="active" class="nav-link" to="/create/block"
+              >Добавить блок</nuxt-link
+            >
+          </li>
+          <!-- админ и работник -->
+          <li class="nav-item" >
+            <nuxt-link active-class="active" class="nav-link" to="/search"
+              >Поиск отправления</nuxt-link
             >
           </li>
         </ul>
@@ -41,7 +59,7 @@
         >Авторизация</nuxt-link
       >
     </div>
-    <div class="auth-user" v-if="isAuth()">
+    <div class="auth-user" v-if="isAuth()" @click="logout()">
       <div class="full-name">
         {{ authUser()[0].full_name }}
       </div>
@@ -53,9 +71,16 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   methods: {
+    logout(){
+      this.SET_LOGOUT()
+      this.CLEAR_BLOCKCHAIN()
+      this.$router.push('/login')
+    },
+    ...mapMutations("auth", ["SET_LOGOUT"]),
+    ...mapMutations("blockchain", ["CLEAR_BLOCKCHAIN"]),
     ...mapGetters("auth", ["authUser", "isAuth"]),
   },
 };
