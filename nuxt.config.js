@@ -35,6 +35,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '@/plugins/vue-simple-accordion.js'
   ],
   /*
   ** Auto import components

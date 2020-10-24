@@ -48,6 +48,11 @@
               >Поиск отправления</nuxt-link
             >
           </li>
+          <li class="nav-item" >
+            <nuxt-link active-class="active" class="nav-link" to="/integrity"
+              >Целостность Блокчейнов</nuxt-link
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -71,8 +76,15 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
+  mounted(){
+    setInterval(() => {
+      if(this.blockchains().length){
+        this.setDataIntegrityCheck()
+      }
+    }, 10000);
+  },
   methods: {
     logout(){
       this.SET_LOGOUT()
@@ -80,8 +92,10 @@ export default {
       this.$router.push('/login')
     },
     ...mapMutations("auth", ["SET_LOGOUT"]),
-    ...mapMutations("blockchain", ["CLEAR_BLOCKCHAIN"]),
+    ...mapMutations("blockchain", ["CLEAR_BLOCKCHAIN", "DATA_INTEGRITY_CHECK"]),
+    ...mapActions("blockchain", ["setDataIntegrityCheck"]),
     ...mapGetters("auth", ["authUser", "isAuth"]),
+    ...mapGetters("blockchain", ["blockchains"]),
   },
 };
 </script>
