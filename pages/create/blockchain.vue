@@ -27,6 +27,10 @@ export default {
   },
   methods: {
     createBlockchain() {
+      if(!this.nameOfSend){
+        alert('Введите название отправления!')
+        return
+      }
       this.setBlockchainId({
         id: this.blockchains().length + 1,
         nameSend: this.nameOfSend,
@@ -62,6 +66,7 @@ export default {
         ],
       });
       this.nameOfSend = "";
+      alert('Отправление(Блокчейн) успешно создано!')
     },
     ...mapActions("blockchain", ["sendData", "setBlockchainId"]),
     ...mapGetters("blockchain", ["blockchain", "blockchains"]),

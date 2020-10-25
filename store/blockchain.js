@@ -8,7 +8,22 @@ export const state = () => ({
 
 export const mutations = {
   SET_BLOCK(state, payload) {
-    state.blockchains[payload.index].blockchain.push(payload.data);
+    console.log(payload.data)
+    console.log(state.blockchains[payload.index].blockchain)
+    let isExist = false
+    state.blockchains[payload.index].blockchain.forEach((item, index) => {
+      if(index){
+        if(item.createrBlock.id === payload.data.createrBlock.id){
+          isExist = true
+        }
+      }
+    })
+    if(!isExist){
+      state.blockchains[payload.index].blockchain.push(payload.data)
+      alert('Блок успешно добавлен!')
+    } else {
+      alert('Вы уже добавляли блок!')
+    }
   },
   CLEAR_BLOCKCHAIN(state){
     state.blockchain = []

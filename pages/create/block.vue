@@ -98,7 +98,7 @@
             type="text"
             class="form-control"
             placeholder="Фактический вес"
-            v-model="formData.departure.phone_number"
+            v-model="formData.departure.fact_weight"
           />
         </div>
         <div class="form-group">
@@ -107,7 +107,7 @@
             type="text"
             class="form-control"
             placeholder="Вес объема"
-            v-model="formData.departure.fact_weight"
+            v-model="formData.departure.volume_weight"
           />
         </div>
         <div class="form-group">
@@ -171,6 +171,23 @@ export default {
   },
   methods: {
     onSubmit() {
+      if(
+        !this.formData.sender.city ||
+        !this.formData.sender.full_name ||
+        !this.formData.sender.address ||
+        !this.formData.sender.phone_number ||
+        !this.formData.recipient.city ||
+        !this.formData.recipient.full_name ||
+        !this.formData.recipient.address ||
+        !this.formData.recipient.phone_number ||
+        !this.formData.departure.fact_weight ||
+        !this.formData.departure.volume_weight ||
+        !this.formData.departure.price ||
+        !this.formData.departure.state_departure 
+      ){
+        alert('Заполните все поля!')
+        return
+      }
       this.sendData({
         index: this.searchBlockchain - 1,
         data: {
