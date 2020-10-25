@@ -27,14 +27,6 @@ export default {
   },
   methods: {
     createBlockchain() {
-      if (!this.blockchain().length) {
-        // this.sendData({
-        //   hash: sha256(0).toString(),
-        //   previousHash: null,
-        //   data: '',
-        //   date: new Date().toLocaleString(),
-        // });
-      }
       this.setBlockchainId({
         id: this.blockchains().length + 1,
         nameSend: this.nameOfSend,

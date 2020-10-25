@@ -2,8 +2,8 @@
   <div class="card" style="width: 18rem">
     <div class="card-body">
       <div class="card-heade-wrap">
-          <small>Блок №{{index}}</small>
-        <h5 class="card-title">Хэш текущего блока: <small>{{ block.hash }}</small></h5>
+          <small>Блок №{{index}} {{index === 0 ? '(Genesis Block)' : ''}}</small>
+        <h5 class="card-title">Хэш текущего блока: <small>{{ block.hash }} </small></h5>
         <h5 class="card-title">
           Хэш предыдущего блока:
          <small> {{

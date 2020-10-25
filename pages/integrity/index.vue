@@ -30,9 +30,7 @@
                                         </vsa-heading>
 
                                         <vsa-content>
-                                            <pre>
-                                                {{blockchainsCheckList[index][index1]}}
-                                            </pre>
+
                                             <vsa-list v-for="(blockchain, index2) in blockchainsCheckList[index][index1]" :key="index2">
                                                 <vsa-item>
                                                     <vsa-heading>
