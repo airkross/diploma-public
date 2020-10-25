@@ -72,11 +72,11 @@
           />
         </div>
         <div class="form-group">
-          <label>Адрес отправителя</label>
+          <label>Адрес получателя</label>
           <input
             type="text"
             class="form-control"
-            placeholder="Адрес отправителя"
+            placeholder="Адрес получателя"
             v-model="formData.recipient.address"
           />
         </div>

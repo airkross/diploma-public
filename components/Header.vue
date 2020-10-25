@@ -53,6 +53,11 @@
               >Целостность Блокчейнов</nuxt-link
             >
           </li>
+          <li class="nav-item" >
+            <nuxt-link active-class="active" class="nav-link" to="/documentation"
+              >Документация</nuxt-link
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -83,7 +88,7 @@ export default {
       if(this.blockchains().length){
         this.setDataIntegrityCheck()
       }
-    }, 10000);
+    }, 60000);
   },
   methods: {
     logout(){

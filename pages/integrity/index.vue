@@ -1,7 +1,7 @@
 <template>
     <div class="container pt-5">
         <div class="message" v-if="!blockchainsCheckList.length">
-            Если вы создали блокчейн, но его еще нет в чеклисте - подождите 10 секунд. / Если вы не создали блокчейн - создайте
+            Если вы создали блокчейн, но его еще нет в чеклисте - подождите 60 секунд. / Если вы не создали блокчейн - создайте
         </div>
         <div class="list-wrap" v-else>
             <div class="list-wrap-left">
