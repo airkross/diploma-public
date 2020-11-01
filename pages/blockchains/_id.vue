@@ -36,11 +36,11 @@
                 <h6>Дата и время создания:</h6> {{blockchains()[$route.params.id - 1].date}}<br>
             </div>
             <div class="d-flex">
-                <h6>Кол-во блоков в цепи:</h6> {{blockchains()[$route.params.id - 1].blockchain.length}}<br>
+                <h6>Кол-во блоков в цепи:</h6> {{blockchains()[$route.params.id - 1].blockchain.length - 1}}<br>
             </div>
             <div class="row pt-5" v-if="blockchains().length">
                 <div class="col-4 mb-3" v-for="(block, index) in blockchains()[$route.params.id - 1].blockchain" :key="index" >
-                    <Card :block="block" :index="index" />
+                    <Card :block="block" :index="index" v-if="blockchains()[$route.params.id - 1].blockchain.length - 1 > index"/>
                 </div>
             </div>
              <b-alert show class="my-5" v-else>На данный момент блоков нет!</b-alert>

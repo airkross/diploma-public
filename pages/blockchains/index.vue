@@ -8,6 +8,9 @@
     <b-alert show class="my-5" v-else>На данный момент блоков нет!</b-alert> -->
     <h2 class="pt-3">Список всех блокчейнов</h2>
     <hr>
+    <!-- <pre>
+      {{blockchains}}
+    </pre> -->
     <div class="blockchains pt-3" v-if="blockchains.length">
       <BlockchainCard  v-for="(blockchainItem, index) in blockchains" :key="index" :blockchainItem="blockchainItem"/>
     </div>

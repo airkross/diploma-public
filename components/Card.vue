@@ -15,27 +15,33 @@
       </div>
       <div class="card-content-wrap">
         <div class="card-body-wrap">
-            <h6>Информация об Отправителе:</h6>
-          <hr />
-          <p class="card-text">Город: {{ parseData.sender.city }}</p>
-          <p class="card-text">ФИО: {{ parseData.sender.full_name }}</p>
-          <p class="card-text">Адрес: {{ parseData.sender.address }}</p>
-          <p class="card-text">Номер телефона: {{ parseData.sender.phone_number }}</p>
-          <hr />
-              <h6>Информация о Получателе:</h6>
-          <p class="card-text">Город: {{ parseData.recipient.city }}</p>
-          <p class="card-text">ФИО: {{ parseData.recipient.full_name }}</p>
-          <p class="card-text">Адрес: {{ parseData.recipient.address }}</p>
-          <p class="card-text">Номер телефона: {{ parseData.recipient.phone_number }}</p>
+          <div class="wrap-info" v-if="isShow">
+             <h6 v-if="parseData ? parseData.sender.city : false">Информация об Отправителе:</h6>
+            <hr v-if="parseData ? parseData.sender.city : false" />
+            <p class="card-text" v-if="parseData ? parseData.sender.city : false">Город: {{ parseData.sender.city }}</p>
+            <p class="card-text" v-if="parseData ? parseData.sender.city : false">ФИО: {{ parseData.sender.full_name }}</p>
+            <p class="card-text" v-if="parseData ? parseData.sender.city : false">Адрес: {{ parseData.sender.address }}</p>
+            <p class="card-text" v-if="parseData ? parseData.sender.city : false">Номер телефона: {{ parseData.sender.phone_number }}</p>
+            <hr v-if=" parseData ? parseData.recipient.city : false" />
+                <h6 v-if=" parseData ? parseData.recipient.city : false"> Информация о Получателе:</h6>
+            <p class="card-text" v-if=" parseData ? parseData.recipient.city : false">Город: {{ parseData.recipient.city }}</p>
+            <p class="card-text" v-if=" parseData ? parseData.recipient.city : false">ФИО: {{ parseData.recipient.full_name }}</p>
+            <p class="card-text" v-if=" parseData ? parseData.recipient.city : false">Адрес: {{ parseData.recipient.address }}</p>
+            <p class="card-text" v-if=" parseData ? parseData.recipient.city : false">Номер телефона: {{ parseData.recipient.phone_number }}</p>
 
-          <hr />
-              <h6>Информация об Отправлении:</h6>
-          <p class="card-text">Фактический вес: {{ parseData.departure.fact_weight }}</p>
-          <p class="card-text">Вес по объему: {{ parseData.departure.volume_weight }}</p>
-          <p class="card-text">Оглашенная цена: {{ parseData.departure.price }}</p>
-          <p class="card-text">
-            Состояние отправления: {{ parseData.departure.state_departure }}
-          </p>
+            <hr v-if="parseData ? parseData.departure.fact_weight : false"/>
+                <h6 v-if="parseData ? parseData.departure.fact_weight : false">Информация об Отправлении:</h6>
+            <p class="card-text" v-if="parseData ? parseData.departure.fact_weight : false">Фактический вес: {{ parseData.departure.fact_weight }}</p>
+            <p class="card-text" v-if="parseData ? parseData.departure.fact_weight : false">Вес по объему: {{ parseData.departure.volume_weight }}</p>
+            <p class="card-text" v-if="parseData ? parseData.departure.fact_weight : false">Оглашенная цена: {{ parseData.departure.price }}</p>
+            <p class="card-text" v-if="parseData ? parseData.departure.fact_weight : false">
+              Состояние отправления: {{ parseData.departure.state_departure }}
+            </p>
+          </div>
+          <div class="error-info" v-else>
+            <hr>
+            Произошла подмена данных!
+          </div>
           <hr>
               <h6>Создатель блока:</h6>
           <p class="card-text">Идентификатор пользователя: {{ block.createrBlock.id }}</p>
@@ -57,6 +63,11 @@
 
 <script>
 export default {
+  data(){
+    return {
+      isShow: true
+    }
+  },
   props: {
     block: {
       type: Object,
@@ -69,17 +80,27 @@ export default {
   },
   computed: {
     parseData() {
-      return JSON.parse(this.block.data);
+      if(this.block.data === 'Произошла подмена данных!'){
+        this.isShow = false
+      }else if(this.block.data){
+        return JSON.parse(this.block.data);
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+.error-info{
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  font-size: 22px;
+}
 .card-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 .card {
   height: 100%;

@@ -12,7 +12,10 @@
       <br />
     </div>
     <div class="form" v-if="blockchains()[searchBlockchain - 1] ? true : false">
-      <div class="sender">
+      <pre>
+        {{authUserComplete().user_type === 'admin' && blockchains().length ? blockchains()[searchBlockchain - 1].blockchain.length <= 2 : false}}
+      </pre>
+      <div class="sender" v-if="authUserComplete().user_type === 'admin' && blockchains().length ? blockchains()[searchBlockchain - 1].blockchain.length <= 2 : false">
         <h2>Информация об Отправителе</h2>
         <div class="form-group">
           <label>Город</label>
@@ -51,7 +54,7 @@
           />
         </div>
       </div>
-      <div class="recipient">
+      <div class="recipient" v-if="authUserComplete().user_type === 'admin' && blockchains().length ? blockchains()[searchBlockchain - 1].blockchain.length <= 2 : false">
         <h2>Информация о Получателе</h2>
         <div class="form-group">
           <label>Город</label>
@@ -135,6 +138,9 @@
     <b-alert show class="my-5 d-flex justify-content-center" v-else
       >Введите ID существующего блокчейна для доступа к полям блока.</b-alert
     >
+    <pre>
+      <!-- {{blockchains()[searchBlockchain - 1].blockchain.length > 2}} -->
+    </pre>
   </div>
 </template>
 
@@ -171,50 +177,94 @@ export default {
   },
   methods: {
     onSubmit() {
-      if(
-        !this.formData.sender.city ||
-        !this.formData.sender.full_name ||
-        !this.formData.sender.address ||
-        !this.formData.sender.phone_number ||
-        !this.formData.recipient.city ||
-        !this.formData.recipient.full_name ||
-        !this.formData.recipient.address ||
-        !this.formData.recipient.phone_number ||
-        !this.formData.departure.fact_weight ||
-        !this.formData.departure.volume_weight ||
-        !this.formData.departure.price ||
-        !this.formData.departure.state_departure 
-      ){
-        alert('Заполните все поля!')
-        return
+      if(this.blockchains()[this.searchBlockchain - 1].blockchain.length <= 2){
+        if(
+          !this.formData.sender.city ||
+          !this.formData.sender.full_name ||
+          !this.formData.sender.address ||
+          !this.formData.sender.phone_number ||
+          !this.formData.recipient.city ||
+          !this.formData.recipient.full_name ||
+          !this.formData.recipient.address ||
+          !this.formData.recipient.phone_number ||
+          !this.formData.departure.fact_weight ||
+          !this.formData.departure.volume_weight ||
+          !this.formData.departure.price ||
+          !this.formData.departure.state_departure 
+        ){
+          alert('Заполните все поля!')
+          return
+        }
+      }else {
+        if(
+          !this.formData.departure.fact_weight ||
+          !this.formData.departure.volume_weight ||
+          !this.formData.departure.price ||
+          !this.formData.departure.state_departure 
+        ){
+          alert('Заполните все поля!')
+          return
+        }
       }
-      this.sendData({
-        index: this.searchBlockchain - 1,
-        data: {
-          previousHash: this.blockchains()[this.searchBlockchain - 1]
-            .blockchain[
-            this.blockchains()[this.searchBlockchain - 1].blockchain.length - 1
-          ].hash,
-          hash: sha256(
-            this.formData.sender.city +
-              this.formData.sender.full_name +
-              this.formData.sender.address +
-              this.formData.sender.phone_number +
-              this.formData.recipient.city +
-              this.formData.recipient.full_name +
-              this.formData.recipient.address +
-              this.formData.recipient.phone_number +
-              this.formData.departure.fact_weight +
-              this.formData.departure.volume_weight +
-              this.formData.departure.price +
-              this.formData.departure.state_departure +
-              new Date()
-          ).toString(),
-          data: JSON.stringify(this.formData),
-          date: new Date().toLocaleString(),
-          createrBlock: this.authUserComplete()
-        },
-      });
+      
+      if(this.blockchains()[this.searchBlockchain - 1].blockchain.length <= 2){
+        this.sendData({
+          index: this.searchBlockchain - 1,
+          data: {
+            // previousHash: this.blockchains()[this.searchBlockchain - 1]
+            //   .blockchain[
+            //   this.blockchains()[this.searchBlockchain - 1].blockchain.length - 1
+            // ].hash,
+            hash: sha256(
+              this.formData.sender.city +
+                this.formData.sender.full_name +
+                this.formData.sender.address +
+                this.formData.sender.phone_number +
+                this.formData.recipient.city +
+                this.formData.recipient.full_name +
+                this.formData.recipient.address +
+                this.formData.recipient.phone_number +
+                this.formData.departure.fact_weight +
+                this.formData.departure.volume_weight +
+                this.formData.departure.price +
+                this.formData.departure.state_departure +
+                new Date()
+            ).toString(),
+            data: JSON.stringify(this.formData),
+            date: new Date().toLocaleString(),
+            createrBlock: this.authUserComplete()
+          },
+        });
+      }else{
+        this.sendData({
+          index: this.searchBlockchain - 1,
+          data: {
+            // previousHash: this.blockchains()[this.searchBlockchain - 1]
+            //   .blockchain[
+            //   this.blockchains()[this.searchBlockchain - 1].blockchain.length - 1
+            // ].hash,
+            hash: sha256(
+              this.formData.sender.city +
+                this.formData.sender.full_name +
+                this.formData.sender.address +
+                this.formData.sender.phone_number +
+                this.formData.recipient.city +
+                this.formData.recipient.full_name +
+                this.formData.recipient.address +
+                this.formData.recipient.phone_number +
+                this.formData.departure.fact_weight +
+                this.formData.departure.volume_weight +
+                this.formData.departure.price +
+                this.formData.departure.state_departure +
+                new Date()
+            ).toString(),
+            data: JSON.stringify(this.formData),
+            date: new Date().toLocaleString(),
+            createrBlock: this.authUserComplete()
+          },
+        });
+      }
+      
       this.formData.sender.city = "";
       this.formData.sender.full_name = "";
       this.formData.sender.address = "";

@@ -38,7 +38,7 @@ export default {
         date: new Date().toLocaleString(),
         blockchain: [
           {
-            hash: sha256(0).toString(),
+            hash: sha256(new Date().toLocaleString()).toString(),
             previousHash: null,
             data: JSON.stringify({
               sender: {
@@ -63,6 +63,32 @@ export default {
             date: new Date().toLocaleString(),
             createrBlock: this.authUserComplete()
           },
+          {
+            hash: '',
+            previousHash: sha256(new Date().toLocaleString()).toString(),
+            data: JSON.stringify({
+              sender: {
+                city: "",
+                full_name: "",
+                address: "",
+                phone_number: "",
+              },
+              recipient: {
+                city: "",
+                full_name: "",
+                address: "",
+                phone_number: "",
+              },
+              departure: {
+                fact_weight: "",
+                volume_weight: "",
+                price: "",
+                state_departure: "",
+              },
+            }),
+            date: '',
+            createrBlock: ''
+          }
         ],
       });
       this.nameOfSend = "";

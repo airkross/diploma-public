@@ -3,6 +3,9 @@
     <h2>Поиск отправления</h2>
     <hr />
     <div class="search-block">
+      <!-- <pre>
+          {{blockchains()}}
+        </pre> -->
       <strong>ID Блокчейнa:</strong> <br />
       <input
         type="text"
@@ -55,16 +58,15 @@
       </div>
       <div class="d-flex">
         <h6>Кол-во блоков в цепи:</h6>
-        {{ blockchains()[searchBlockchain - 1].blockchain.length }}<br />
+        {{ blockchains()[searchBlockchain - 1].blockchain.length - 1}}<br />
       </div>
       <div class="row pt-5" v-if="blockchains().length">
         <div
           class="col-4 mb-3"
-          v-for="(block, index) in blockchains()[searchBlockchain - 1]
-            .blockchain"
+          v-for="(block, index) in blockchains()[searchBlockchain - 1].blockchain.length ? blockchains()[searchBlockchain - 1].blockchain : []"
           :key="index"
         >
-          <Card :block="block" :index="index" />
+          <Card :block="block" :index="index" v-if="blockchains()[searchBlockchain - 1].blockchain.length - 1 > index"/>
         </div>
       </div>
       <b-alert show class="my-5" v-else>На данный момент блоков нет!</b-alert>
