@@ -12,9 +12,6 @@
       <br />
     </div>
     <div class="form" v-if="blockchains()[searchBlockchain - 1] ? true : false">
-      <pre>
-        {{authUserComplete().user_type === 'admin' && blockchains().length ? blockchains()[searchBlockchain - 1].blockchain.length <= 2 : false}}
-      </pre>
       <div class="sender" v-if="authUserComplete().user_type === 'admin' && blockchains().length ? blockchains()[searchBlockchain - 1].blockchain.length <= 2 : false">
         <h2>Информация об Отправителе</h2>
         <div class="form-group">
